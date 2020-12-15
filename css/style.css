@@ -1,0 +1,5 @@
+/* selecteur pour tous les h1 */
+h1{
+    color: blue;
+    font-weight: 900;
+}
