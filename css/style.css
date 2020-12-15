@@ -1,5 +1,48 @@
+/* selecteur du body */
+body{
+    background-image: url('../img/js.PNG');
+    background-size: 100vw 100vh;
+}
 /* selecteur pour tous les h1 */
 h1{
     color: blue;
     font-weight: 900;
+}
+/* selecteur du formulaire */
+#formulaire{
+    border:1px solid black;
+    border-radius: 7px;
+}
+/* selection d'un postit */
+.postit{
+    background-color: rgba(241, 232, 150, 0.92);
+    border-bottom-right-radius: 25px;
+    width: 20%;
+    min-width: 300px;
+    display: inline-block;
+    padding: 10px;
+    margin-left: 15px;
+    border: 1px solid darkgray;
+    box-shadow: 15px 15px 25px grey;
+    text-align: center;
+}
+/* selection du titre d'un post-it */
+.postit-titre{
+    font-size: 40pt;
+    font-weight: 700;
+    text-decoration: underline blue;
+    margin-bottom: 8px;
+}
+/* selection des datatime uniquement dans un .postit */
+.postit.datatime{
+    font-weight: 900;
+    font-size: x-large;
+}
+/* selection pour la suppresion */ 
+@media print{
+    body{
+        background-image: none;
+        background-color: cadetblue;
+        color: blue;
+    }
 }
