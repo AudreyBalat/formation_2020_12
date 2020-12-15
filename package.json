@@ -1,0 +1,23 @@
+{
+  "name": "formation_2020_12",
+  "version": "1.0.0",
+  "description": "Formation DHL decembre 2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AudreyBalat/formation_2020_12.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AudreyBalat/formation_2020_12/issues"
+  },
+  "homepage": "https://github.com/AudreyBalat/formation_2020_12#readme",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
