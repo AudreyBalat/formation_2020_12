@@ -31,9 +31,10 @@ function formSubmited(evt) {
     //autre methode
     //console.log(document.querySelector('#editor-title'));
     var monFormulaire=document.forms['editor-form'];
+    var dateFormated=moment(monFormulaire['date'].value, 'DD MM YYY');
     createPostIt(
                     monFormulaire['title'].value, 
-                    monFormulaire['date'].value, 
+                    dateFormated, 
                     monFormulaire['heure'].value, 
                     monFormulaire['description'].value
                 );
