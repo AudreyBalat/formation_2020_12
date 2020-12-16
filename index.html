@@ -10,11 +10,23 @@
     <div id="main">
         <div id="editor">
             <div id="formulaire">
-                <h1>Titre de la note :</h1>
-                Mon titre de la note</br>
-                date : 2020-01-01 heure : 12:00:00
-                <h2>Description:</h2>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi voluptas ut hic harum nisi? Deserunt, vel delectus eveniet quae consectetur commodi quas, ipsa in ullam perferendis recusandae! Nostrum, tenetur architecto!
+                <form action="#" methode="" name="editor-form">
+                    <h1>Titre de la note :</h1>
+                    <input type="texte" name="title" id="editor-title" placeholder="Saisissez le titre"/>
+                    <br/>
+                    <div style="display: inline-block;">
+                        <h4> date :</h4> <input type="date" name="" id="">
+                    </div>
+                    <div style="display: inline-block;">
+                        <h4> heure :</h4> <input type="time" name="" id="">
+                    </div>
+                    <h2>Description:</h2>
+                    <textarea name="description" id="editor-description" placeholder="Saisissez la description"></textarea>
+                    <div style="text-align: center;">
+                        <input type="reset" value="Reinit"> 
+                        <input type="submit" value="Valider">
+                    </div>
+               </form> 
             </div> 
         </div>
         <hr/> 
