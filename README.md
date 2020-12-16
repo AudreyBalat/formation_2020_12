@@ -6,3 +6,6 @@ Création de la structure
 
 ## Etape 2 
 Mise en place d'une feuille css
+
+## Etape 3 
+Mise en place du formulaire et son css affilié
