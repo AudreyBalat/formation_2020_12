@@ -9,3 +9,6 @@ Mise en place d'une feuille css
 
 ## Etape 3 
 Mise en place du formulaire et son css affilié
+
+## Etape 4
+Selection d'un balise et modif du contenu grâce à innerHTML
