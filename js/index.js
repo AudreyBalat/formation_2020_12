@@ -28,4 +28,23 @@ function formSubmited(evt) {
     console.log(evt.target[2].value);
     console.log(evt.target[3].value);
     console.log(evt.target[0].value);
+    //autre methode
+    console.log(document.querySelector('#editor-title'));
 }
+
+function createPostIt(params) {
+    var postit=document.createElement('div');    
+    //ajout d'une class dans la liste de class d'un element
+    postit.classList.add('postit');
+    //possibilité de suppression
+    //postit.classList.remove('postit');
+    postit.innerHTML='Bienvenue dans le cosmos';
+
+    //selection de la liste postit
+    var list=document.querySelector('#list');
+    //ajout dans la liste de l'élement postit
+    list.append(postit);
+}
+
+
+

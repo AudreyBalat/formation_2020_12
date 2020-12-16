@@ -49,6 +49,10 @@ h1{
     font-weight: 900;
     font-size: x-large;
 }
+/*Tous les enfants sont vertical aligné vers le haut*/
+#list>*{
+    vertical-align: top;
+}
 /* selection pour la suppresion */ 
 @media print{
     body{
