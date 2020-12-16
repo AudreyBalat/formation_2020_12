@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Post It&copy;</title> <!-- &copy pour le copie right-->
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="js/index.js"></script>
 </head>
 <body>
     <div id="jsload" style="background-color: orange; color: black; text-align: center;">JS PAS CHARGE</div>
@@ -17,10 +16,10 @@
                     <input type="texte" name="title" id="editor-title" placeholder="Saisissez le titre"/>
                     <br/>
                     <div style="display: inline-block;">
-                        <h4> date :</h4> <input type="date" name="" id="">
+                        <h4> date :</h4> <input type="date" name="date" id="editor-date">
                     </div>
                     <div style="display: inline-block;">
-                        <h4> heure :</h4> <input type="time" name="" id="">
+                        <h4> heure :</h4> <input type="time" name="heure" id="editor-timenpm test">
                     </div>
                     <h2>Description:</h2>
                     <textarea name="description" id="editor-description" placeholder="Saisissez la description"></textarea>
@@ -49,5 +48,7 @@
             </div> 
         </div>
     </div>
+    <script src="node_modules//moment/dist/moment.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

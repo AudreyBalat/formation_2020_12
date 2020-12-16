@@ -29,17 +29,24 @@ function formSubmited(evt) {
     console.log(evt.target[3].value);
     console.log(evt.target[0].value);
     //autre methode
-    console.log(document.querySelector('#editor-title'));
+    //console.log(document.querySelector('#editor-title'));
+    var monFormulaire=document.forms['editor-form'];
+    createPostIt(
+                    monFormulaire['title'].value, 
+                    monFormulaire['date'].value, 
+                    monFormulaire['heure'].value, 
+                    monFormulaire['description'].value
+                );
 }
 
 /**
  * Fonction de creation d'un postit avec ajout dans la balise #list
- * @param {String} titre titre de la note
+ * @param {String} title titre de la note
  * @param {String} date date pour la note
  * @param {String} heure heure pour la note
  * @param {String} description description de la note
  */
-function createPostIt(titre, date, heure, description) {
+function createPostIt(title, date, heure, description) {
     var postit=document.createElement('div');    
     //ajout d'une class dans la liste de class d'un element
     postit.classList.add('postit');
@@ -47,7 +54,7 @@ function createPostIt(titre, date, heure, description) {
     //postit.classList.remove('postit');
     //----------------------------------
     //creation du contenu par interpretation de la chaine et constitution d'un DOM pour cette balise
-    postit.innerHTML='<div class="postit-titre">'+titre+'</div>\
+    postit.innerHTML='<div class="postit-titre">'+title+'</div>\
     date : <span class="datatime">'+date+'</span>\
     heure : <span class="datatime">'+heure+'</span>\
     <h2>Description:</h2>'+description
