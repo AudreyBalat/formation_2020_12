@@ -54,14 +54,26 @@ function createPostIt(title, date, heure, description) {
     //postit.classList.remove('postit');
     //----------------------------------
     //creation du contenu par interpretation de la chaine et constitution d'un DOM pour cette balise
-    postit.innerHTML='<div class="postit-titre">'+title+'</div>\
+    postit.innerHTML='<div class="close"><img src="img/close.png"/></div>\
+    <div class="postit-titre">'+title+'</div>\
     date : <span class="datatime">'+date+'</span>\
     heure : <span class="datatime">'+heure+'</span>\
     <h2>Description:</h2>'+description
+    //selection de .close img à partir de postit + add listener sur event click, delete
+    postit.querySelector('.close img').addEventListener('click', deletePostIt);
+   
     //selection de la liste postit
     var list=document.querySelector('#list');
     //ajout dans la liste de l'élement postit
     list.append(postit);
+}
+
+// suppression d'un post it
+function deletePostIt(evt) {
+    //console.log('evenement lié à la suppression', evt);
+    //Supprime la clases postit (on est sur l'image)
+    evt.currentTarget.parentElement.parentElement.remove();
+
 }
 
 

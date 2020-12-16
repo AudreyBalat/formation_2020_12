@@ -49,6 +49,14 @@ h1{
     font-weight: 900;
     font-size: x-large;
 }
+/*selection close*/
+.close{
+    float: right;
+}
+.close img{
+    width: 32px;
+    height: 32px;
+}
 /*Tous les enfants sont vertical aligné vers le haut*/
 #list>*{
     vertical-align: top;
