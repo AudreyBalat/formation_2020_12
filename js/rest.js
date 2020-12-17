@@ -14,7 +14,7 @@ var Crud=function name(baseurl) {
         //instanciation de XHR
         var xhr=new XMLHttpRequest();
         //ouverture de la connexion
-        xhr.open('GET', Bbaseurl+ressourceUrl);
+        xhr.open('GET', baseurl+ressourceUrl);
         //tache à effectuer à chaquechangement de readstate (passa d'une étape de reception)
         // 1 -> open 2 -> send 3 -> en crours de recetption 4 -> fin de reception
         xhr.onreadystatechange=function(evt){
