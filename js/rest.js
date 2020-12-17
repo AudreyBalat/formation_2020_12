@@ -48,9 +48,8 @@ function post(ressourceUrl, ressource){
 /**
  * Permet l'envoie du DELETE
  * @param {*} ressourceUrl 
- * @param {*} ressource 
  */
-function remove(ressourceUrl, ressource) {
+function remove(ressourceUrl) {
     //instanciation de XHR
     var xhr=new XMLHttpRequest();
     //ouverture de la connexion
@@ -62,5 +61,29 @@ function remove(ressourceUrl, ressource) {
         console.log(JSON.parse(xhr.response));
     }
     xhr.send();
+}
+/**
+ * Permet l'envoi en PUT d'une ressource sur l'ressource Url
+ * @param {*} ressourceUrl chemin du post
+ * @param {*} ressource data a envoyé
+ */
+function put(ressourceUrl, ressource){
+    //instanciation de XHR
+    var xhr=new XMLHttpRequest();
+    //ouverture de la connexion
+    xhr.open('PUT', BASE_URL+ressourceUrl);
+    //instanciation des headers
+    //specification du type contenu
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    //specification de ce qui est attendu en retour
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onreadystatechange=function(evt){
+        if(xhr.readyState<4){
+            return;
+        }
+        console.log(JSON.parse(xhr.response));
+    }
+    //transformation en JSON du contenu Objet
+    xhr.send(JSON.stringify(ressource));
 }
 get('/postit/1');
