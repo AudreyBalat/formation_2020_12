@@ -13,7 +13,8 @@ addEventListener('load', function(event) { //window.addEvent ... Comme window pa
         mesPostIts.forEach(postit => {
             console.log(postit);
             //createPostIt(mesPostIts.title, date, heure, description)
-            createPostIt(postit.titre, postit.datatime.substring(0,10), postit.datatime.substring(12), postit.description);
+            //createPostIt(postit.titre, postit.datatime.substring(0,10), postit.datatime.substring(11), postit.description);
+            createPostItByObject(postit);
         });
     });
 });
@@ -69,6 +70,34 @@ function createPostIt(title, date, heure, description) {
     date : <span class="datatime">'+date+'</span>\
     heure : <span class="datatime">'+heure+'</span>\
     <h2>Description:</h2>'+description
+    //selection de .close img à partir de postit + add listener sur event click, delete
+    postit.querySelector('.close img').addEventListener('click', deletePostIt);
+   
+    //selection de la liste postit
+    var list=document.querySelector('#list');
+    //ajout dans la liste de l'élement postit
+    list.append(postit);
+}
+
+/**
+ * Fonction de création d'un postot avvec ajuor dans la balise dic#list par le biais d'un objet postit comple
+ * @param {Object} postit object postIt instancié
+ */
+function createPostItByObject(postitInput) {
+    var postit=document.createElement('div');  
+    //creation de l'id de balise en liens avec l'id du postit dans le rest pour facilité la suppresion 
+    postit.id='postit-'+postitInput.id;
+    //ajout d'une class dans la liste de class d'un element
+    postit.classList.add('postit');
+    //possibilité de suppression
+    //postit.classList.remove('postit');
+    //----------------------------------
+    //creation du contenu par interpretation de la chaine et constitution d'un DOM pour cette balise
+    postit.innerHTML='<div class="close"><img src="img/close.png"/></div>\
+    <div class="postit-titre">'+postitInput.title+'</div>\
+    date : <span class="datatime">'+postitInput.datatime.substring(1,10)+'</span>\
+    heure : <span class="datatime">'+postitInput.datatime.substring(11)+'</span>\
+    <h2>Description:</h2>'+postitInput.description
     //selection de .close img à partir de postit + add listener sur event click, delete
     postit.querySelector('.close img').addEventListener('click', deletePostIt);
    
