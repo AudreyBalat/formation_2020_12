@@ -63,7 +63,7 @@ var Crud=function name(baseurl) {
         //ouverture de la connexion
         xhr.open('DELETE', baseurl+ressourceUrl);
         xhr.onreadystatechange=function(evt){
-            if(xhr.readyState<4 || xhr.status==200){
+            if(xhr.readyState < 4 || xhr.status != 200){
                 return;
             }
             //console.log(JSON.parse(xhr.response));
