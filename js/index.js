@@ -16,7 +16,7 @@ addEventListener('load', function(event) { //window.addEvent ... Comme window pa
             createPostIt(postit.titre, postit.datatime.substring(0,10), postit.datatime.substring(12), postit.description);
         });
     });
-})
+});
 
 //declaration d'une fonction
 function initialisationJS(prenom){
