@@ -92,4 +92,10 @@ var Crud=function name(baseurl) {
         //transformation en JSON du contenu Objet
         xhr.send(JSON.stringify(ressource));
     }  
+    //zone d'exposition des fonctions en public
+    //pour acces depuis l'exterieur de l'instance
+    this.recuperer=get;
+    this.creer=post;
+    this.maj=put;
+    this.supprimer=remove;
 }
