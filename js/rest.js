@@ -3,7 +3,7 @@ var BASE_URL='http://localhost:3133'
 //declaration d'un créateur d'objet
 /**
  * Objet permettant les appels htpp
- * @param {*} baseurl base de l'url des ressources
+ * @param {Uri} baseurl base de l'url des ressources
  */
 var Crud=function name(baseurl) {
     /**
@@ -30,8 +30,8 @@ var Crud=function name(baseurl) {
     }
     /**
      * Permet l'envoi en POST d'une ressource sur l'ressource Url
-     * @param {*} ressourceUrl chemin du post
-     * @param {*} ressource data a envoyé
+     * @param {Uri} ressourceUrl chemin du post
+     * @param {Object} ressource data a envoyé
      */
     function post(ressourceUrl, ressource){
         //instanciation de XHR
@@ -54,25 +54,27 @@ var Crud=function name(baseurl) {
     }
     /**
      * Permet l'envoie du DELETE
-     * @param {*} ressourceUrl 
+     * @param {Uri} ressourceUrl adresse de la ressource
+     * @param {Function} callback fonction à executer à la fin de la suppression
      */
-    function remove(ressourceUrl) {
+    function remove(ressourceUrl, callback) {
         //instanciation de XHR
         var xhr=new XMLHttpRequest();
         //ouverture de la connexion
         xhr.open('DELETE', baseurl+ressourceUrl);
         xhr.onreadystatechange=function(evt){
-            if(xhr.readyState<4){
+            if(xhr.readyState<4 || xhr.status==200){
                 return;
             }
-            console.log(JSON.parse(xhr.response));
+            //console.log(JSON.parse(xhr.response));
+            callback();
         }
         xhr.send();
     }
     /**
      * Permet l'envoi en PUT d'une ressource sur l'ressource Url
-     * @param {*} ressourceUrl chemin du post
-     * @param {*} ressource data a envoyé
+     * @param {Uri} ressourceUrl chemin du post
+     * @param {Object} ressource data a envoyé
      */
     function put(ressourceUrl, ressource){
         //instanciation de XHR

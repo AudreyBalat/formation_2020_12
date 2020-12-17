@@ -111,8 +111,12 @@ function createPostItByObject(postitInput) {
 function deletePostIt(evt) {
     //console.log('evenement lié à la suppression', evt);
     //Supprime la clases postit (on est sur l'image)
-    evt.currentTarget.parentElement.parentElement.remove();
-
+    //evt.currentTarget.parentElement.parentElement.remove();
+    var domPostItId=evt.path[2].id.substring(7);
+    (new Crud(BASE_URL)).supprimer('/postit/'+domPostItId, function () {
+        //evt.currentTarget.parentElement.parentElement.remove();
+        evt.path[2].remove();
+    })
 }
 
 
