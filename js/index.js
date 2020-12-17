@@ -6,6 +6,16 @@ addEventListener('load', function(event) { //window.addEvent ... Comme window pa
     //event : submit
     //fonction à déclencher pour l'event -W formSubmited
     document.querySelector('form').addEventListener('submit', formSubmited); // Pas formSubmited() car sinon la fonction va s'exécuter, or elle doit s'executer uniquement lors de l'appel
+    // chargement initial des postIt - new entre parentheses pour eviter de faire un var crud = new Crud ... bien si on utilise qu'une seule fois la valeur
+    (new Crud(BASE_URL)).recuperer('/postit', function(mesPostIts){
+        console.log('j\'ai fini de recevoir mes postIt, voici la liste : ', mesPostIts);
+        //Boucle permettant de faire une action sur chacun des postits
+        mesPostIts.forEach(postit => {
+            console.log(postit);
+            //createPostIt(mesPostIts.title, date, heure, description)
+            createPostIt(postit.titre, postit.datatime.substring(0,10), postit.datatime.substring(12), postit.description);
+        });
+    });
 })
 
 //declaration d'une fonction
