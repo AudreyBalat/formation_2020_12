@@ -1,3 +1,22 @@
 {
-    
+  "postit": [
+    {
+      "id": 0,
+      "title": "Mon 1er postIt",
+      "datatime": "2020-12-17T10:06:00",
+      "description": "Voici la description du postIt"
+    },
+    {
+      "id": 1,
+      "title": "Mon 2er postIt",
+      "datatime": "2020-12-16T11:06:00",
+      "description": "Voici la description du postIt 2"
+    }
+  ],
+  "proprietaire": {
+    "nom": "BALAT",
+    "prenom": "Audrey",
+    "mail": "audrey.balat028@gmail.com",
+    "tel": "0602272596"
+  }
 }
