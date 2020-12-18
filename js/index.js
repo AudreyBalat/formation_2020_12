@@ -1,16 +1,21 @@
+var lastID=0;
 //declaration d'une fonction anonyme
-addEventListener('load', function(event) { //window.addEvent ... Comme window pas besoin  de preciser
+addEventListener('load', function(evt) { //window.addEvent ... Comme window pas besoin  de preciser
     //usage d'une fonction
     initialisationJS('Audrey');
     //accrochage d'un ecouteur d'event sur une balise
     //event : submit
     //fonction à déclencher pour l'event -W formSubmited
     document.querySelector('form').addEventListener('submit', formSubmited); // Pas formSubmited() car sinon la fonction va s'exécuter, or elle doit s'executer uniquement lors de l'appel
+    document.querySelector('form').addEventListener('reset', formReseted);
     // chargement initial des postIt - new entre parentheses pour eviter de faire un var crud = new Crud ... bien si on utilise qu'une seule fois la valeur
     (new Crud(BASE_URL)).recuperer('/postit', function(mesPostIts){
         console.log('j\'ai fini de recevoir mes postIt, voici la liste : ', mesPostIts);
         //Boucle permettant de faire une action sur chacun des postits
         mesPostIts.forEach(postit => {
+            if (lastID<postit.id) {
+                lastId=postit.id;
+            }
             console.log(postit);
             //createPostIt(mesPostIts.title, date, heure, description)
             //createPostIt(postit.titre, postit.datatime.substring(0,10), postit.datatime.substring(11), postit.description);
@@ -28,7 +33,6 @@ function initialisationJS(prenom){
     //modif du contenu
     jsload.innerHTML= 'Mon <span style="font-weight:900"> JS </span> CHARGE pour '+prenom; 
 }
-
 //fonction formSubmited
 function formSubmited(evt) {
     evt.preventDefault();
@@ -66,6 +70,17 @@ function formSubmited(evt) {
     //                monFormulaire['description'].value
     //            );
 }
+
+//fonction formResetet
+const formReseted=(evt)=>{
+    const form= document.forms['editor-form'];
+  for(let i=0 ; i < form.length ; i++ ){
+      if (form[i].type !== 'reset' && form[i].type !== 'submit'){
+          input.value='';
+      }
+  }
+}
+
 
 /**
  * Fonction de creation d'un postit avec ajout dans la balise #list
@@ -153,6 +168,17 @@ function putinformclickedpostit(evt) {
     document.forms['editor-form']['date'].value=dompostit.querySelector('.postit-date').innerText;
     document.forms['editor-form']['heure'].value=dompostit.querySelector('.postit-heure').innerText;
     document.forms['editor-form']['description'].value=dompostit.querySelector('.postit-description').innerText;
+}
+/**
+ * fonction pour recperer les notes a partir de la valeur d'un id lasId
+ */
+const pullingFunction=()=>{
+    (new Crud(BASE_URL)).recuperer('/postit?id_gte='+(lastID+1), (listeDesPostIt)=> {
+        listeDesPostIt.map((element)=>{
+            lastID=(lastID<element.id?element.id:lastID);
+            createPostItByObject(element);
+        });
+    });
 }
 
 
