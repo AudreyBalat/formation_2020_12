@@ -51,7 +51,7 @@ function formSubmited(evt) {
     (new Crud(BASE_URL)).creer('/postit', postit, function (obj) {
         //evt.currentTarget.parentElement.parentElement.remove();
         createPostItByObject(obj);
-    })
+    });
     //creation du post it dansn le db
     //createPostIt(
     //                monFormulaire['title'].value, 
