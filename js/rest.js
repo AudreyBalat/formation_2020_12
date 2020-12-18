@@ -6,6 +6,14 @@ var BASE_URL='http://localhost:3133'
  * @param {Uri} baseurl base de l'url des ressources
  */
 var Crud=function name(baseurl) {
+
+    //zone d'exposition des fonctions en public
+    //pour acces depuis l'exterieur de l'instance
+    this.recuperer=_get;
+    this.creer=_post;
+    this.maj=_put;
+    this.supprimer=_remove;
+
     /**
      * Permet l'appel HTTP avec XMLHTttpRequest
      * @param {*} ressourceUrl url de la ressource
@@ -32,8 +40,9 @@ var Crud=function name(baseurl) {
      * Permet l'envoi en POST d'une ressource sur l'ressource Url
      * @param {Uri} ressourceUrl chemin du post
      * @param {Object} ressource data a envoyé
+     * @param {Function} callback fonction de callback
      */
-    function _post(ressourceUrl, ressource){
+    function _post(ressourceUrl, ressource, callback){
         //instanciation de XHR
         var xhr=new XMLHttpRequest();
         //ouverture de la connexion
@@ -44,10 +53,11 @@ var Crud=function name(baseurl) {
         //specification de ce qui est attendu en retour
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.onreadystatechange=function(evt){
-            if(xhr.readyState<4){
+            if(xhr.readyState < 4 || xhr.status != 201){
                 return;
             }
             console.log(JSON.parse(xhr.response));
+            callback(JSON.parse(xhr.response));
         }
         //transformation en JSON du contenu Objet
         xhr.send(JSON.stringify(ressource));
@@ -95,10 +105,4 @@ var Crud=function name(baseurl) {
         //transformation en JSON du contenu Objet
         xhr.send(JSON.stringify(ressource));
     }  
-    //zone d'exposition des fonctions en public
-    //pour acces depuis l'exterieur de l'instance
-    this.recuperer=_get;
-    this.creer=_post;
-    this.maj=_put;
-    this.supprimer=_remove;
 }

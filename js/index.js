@@ -38,16 +38,26 @@ function formSubmited(evt) {
     console.log(evt.target[1].value);
     console.log(evt.target[2].value);
     console.log(evt.target[3].value);
-    console.log(evt.target[0].value);
     //autre methode
     //console.log(document.querySelector('#editor-title'));
     var monFormulaire=document.forms['editor-form'];
-    createPostIt(
-                    monFormulaire['title'].value, 
-                    monFormulaire['date'].value, 
-                    monFormulaire['heure'].value, 
-                    monFormulaire['description'].value
-                );
+    //construction de l'objet à envoyer au rest
+    var postit={
+        title:monFormulaire['title'].value, 
+        datatime:evt.target[1].value+'T'+evt.target[2].value,
+        description:evt.target[3].value
+    }
+    //appel rest pour l'ajout dans la list et recup de l'id
+    (new Crud(BASE_URL)).creer('/postit', postit, function(objSaved){
+        createPostItByObject(objSaved);
+    });
+    //creation du post it dansn le db
+    //createPostIt(
+    //                monFormulaire['title'].value, 
+    //               monFormulaire['date'].value, 
+    //                monFormulaire['heure'].value, 
+    //                monFormulaire['description'].value
+    //            );
 }
 
 /**
