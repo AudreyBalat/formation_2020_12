@@ -172,11 +172,22 @@ function putinformclickedpostit(evt) {
     document.forms['editor-form']['heure'].value=dompostit.querySelector('.postit-heure').innerText;
     document.forms['editor-form']['description'].value=dompostit.querySelector('.postit-description').innerText;
 }
+function getLastIdInDom(){
+    lastID=-1;
+    const listChildren=document.querySelector('#list').children;
+    for(domPostItId in listChildren){
+        if(lastID<dompostit.id.substring(0,7)){
+            lastID=domPostItId.id.substring(7);
+        }
+    }
+}
 /**
  * fonction pour recperer les notes a partir de la valeur d'un id lasId
  */
 const pullingFunction=()=>{
-    (new Crud(BASE_URL)).recuperer('/postit?id_gte='+(lastID+1), (listeDesPostIt)=> {
+    getLastIdInDom();
+    const lastIdPlus1= lastID+1
+    (new Crud(BASE_URL)).recuperer('/postit?id_gte='+lastIdPlus1, (listeDesPostIt)=> {
         listeDesPostIt.map((element)=>{
             //usage d'une ternaire  condition ? cas si c'est vrai : cas si c'est faux
             lastID=(lastID<element.id?element.id:lastID);
