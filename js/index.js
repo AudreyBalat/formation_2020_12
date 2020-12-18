@@ -48,9 +48,10 @@ function formSubmited(evt) {
         description:evt.target[3].value
     }
     //appel rest pour l'ajout dans la list et recup de l'id
-    (new Crud(BASE_URL)).creer('/postit', postit, function(objSaved){
-        createPostItByObject(objSaved);
-    });
+    (new Crud(BASE_URL)).creer('/postit', postit, function (obj) {
+        //evt.currentTarget.parentElement.parentElement.remove();
+        createPostItByObject(obj);
+    })
     //creation du post it dansn le db
     //createPostIt(
     //                monFormulaire['title'].value, 
