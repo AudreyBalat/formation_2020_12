@@ -1,4 +1,5 @@
 var lastID=0;
+var descriptionDInterval;
 //declaration d'une fonction anonyme
 addEventListener('load', function(evt) { //window.addEvent ... Comme window pas besoin  de preciser
     //usage d'une fonction
@@ -9,19 +10,21 @@ addEventListener('load', function(evt) { //window.addEvent ... Comme window pas 
     document.querySelector('form').addEventListener('submit', formSubmited); // Pas formSubmited() car sinon la fonction va s'exécuter, or elle doit s'executer uniquement lors de l'appel
     document.querySelector('form').addEventListener('reset', formReseted);
     // chargement initial des postIt - new entre parentheses pour eviter de faire un var crud = new Crud ... bien si on utilise qu'une seule fois la valeur
-    (new Crud(BASE_URL)).recuperer('/postit', function(mesPostIts){
-        console.log('j\'ai fini de recevoir mes postIt, voici la liste : ', mesPostIts);
-        //Boucle permettant de faire une action sur chacun des postits
-        mesPostIts.forEach(postit => {
-            if (lastID<postit.id) {
-                lastId=postit.id;
-            }
-            console.log(postit);
-            //createPostIt(mesPostIts.title, date, heure, description)
-            //createPostIt(postit.titre, postit.datatime.substring(0,10), postit.datatime.substring(11), postit.description);
-            createPostItByObject(postit);
-        });
-    });
+    pullingFunction();
+    descriptionDInterval=setInterval(pullingFunction, 5000);
+    // (new Crud(BASE_URL)).recuperer('/postit', function(mesPostIts){
+    //     console.log('j\'ai fini de recevoir mes postIt, voici la liste : ', mesPostIts);
+    //     //Boucle permettant de faire une action sur chacun des postits
+    //     mesPostIts.forEach(postit => {
+    //         if (lastID<postit.id) {
+    //             lastId=postit.id;
+    //         }
+    //         console.log(postit);
+    //         //createPostIt(mesPostIts.title, date, heure, description)
+    //         //createPostIt(postit.titre, postit.datatime.substring(0,10), postit.datatime.substring(11), postit.description);
+    //         createPostItByObject(postit);
+    //     });
+    // });
 });
 
 //declaration d'une fonction
@@ -175,6 +178,7 @@ function putinformclickedpostit(evt) {
 const pullingFunction=()=>{
     (new Crud(BASE_URL)).recuperer('/postit?id_gte='+(lastID+1), (listeDesPostIt)=> {
         listeDesPostIt.map((element)=>{
+            //usage d'une ternaire  condition ? cas si c'est vrai : cas si c'est faux
             lastID=(lastID<element.id?element.id:lastID);
             createPostItByObject(element);
         });
