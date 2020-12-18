@@ -43,14 +43,14 @@ function formSubmited(evt) {
     var monFormulaire=document.forms['editor-form'];
     //construction de l'objet à envoyer au rest
     var postit={
-        title:monFormulaire['title'].value, 
+        title:evt.target[0].value, 
         datatime:evt.target[1].value+'T'+evt.target[2].value,
         description:evt.target[3].value
-    }
+    };
     //appel rest pour l'ajout dans la list et recup de l'id
-    (new Crud(BASE_URL)).creer('/postit', postit, function (obj) {
+    (new Crud(BASE_URL)).creer('/postit', postit, function (objSaved) {
         //evt.currentTarget.parentElement.parentElement.remove();
-        createPostItByObject(obj);
+        createPostItByObject(objSaved);
     });
     //creation du post it dansn le db
     //createPostIt(
@@ -100,13 +100,14 @@ function createPostItByObject(postitInput) {
     postit.id='postit-'+postitInput.id;
     //ajout d'une class dans la liste de class d'un element
     postit.classList.add('postit');
+    postit.addEventListener('click', putinformclickedpostit);
     //possibilité de suppression
     //postit.classList.remove('postit');
     //----------------------------------
     //creation du contenu par interpretation de la chaine et constitution d'un DOM pour cette balise
     postit.innerHTML='<div class="close"><img src="img/close.png"/></div>\
     <div class="postit-titre">'+postitInput.title+'</div>\
-    date : <span class="datatime">'+postitInput.datatime.substring(1,10)+'</span>\
+    date : <span class="datatime">'+postitInput.datatime.substring(0,10)+'</span>\
     heure : <span class="datatime">'+postitInput.datatime.substring(11)+'</span>\
     <h2>Description:</h2>'+postitInput.description
     //selection de .close img à partir de postit + add listener sur event click, delete
@@ -120,6 +121,7 @@ function createPostItByObject(postitInput) {
 
 // suppression d'un post it
 function deletePostIt(evt) {
+    evt.stopPropagation();
     //console.log('evenement lié à la suppression', evt);
     //Supprime la clases postit (on est sur l'image)
     //evt.currentTarget.parentElement.parentElement.remove();
@@ -128,6 +130,10 @@ function deletePostIt(evt) {
         //evt.currentTarget.parentElement.parentElement.remove();
         evt.path[2].remove();
     })
+}
+//fonction d'element tout en minuscule
+function putinformclickedpostit(evt) {
+    console.log('j\'ai clicker sur un postit', evt);
 }
 
 
