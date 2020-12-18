@@ -43,13 +43,19 @@ function formSubmited(evt) {
     var monFormulaire=document.forms['editor-form'];
     //construction de l'objet à envoyer au rest
     var postit={
-        title:evt.target[0].value, 
-        datatime:evt.target[1].value+'T'+evt.target[2].value,
-        description:evt.target[3].value
+        title:monFormulaire["title"].value, 
+        datatime:monFormulaire['date'].value+'T'+monFormulaire['heure'].value,
+        description:monFormulaire['description'].value
     };
+    if(monFormulaire['id'].value!==''){
+        postit.id=monFormulaire['id'].value;
+    }
     //appel rest pour l'ajout dans la list et recup de l'id
-    (new Crud(BASE_URL)).creer('/postit', postit, function (objSaved) {
+    (new Crud(BASE_URL)).envoiRessource('/postit', postit, function (objSaved) {
         //evt.currentTarget.parentElement.parentElement.remove();
+        if(undefined !== postit.id){
+            document.querySelector('#postit-'+postit.id).remove();
+        }
         createPostItByObject(objSaved);
     });
     //creation du post it dansn le db
@@ -106,10 +112,10 @@ function createPostItByObject(postitInput) {
     //----------------------------------
     //creation du contenu par interpretation de la chaine et constitution d'un DOM pour cette balise
     postit.innerHTML='<div class="close"><img src="img/close.png"/></div>\
-    <div class="postit-titre">'+postitInput.title+'</div>\
-    date : <span class="datatime">'+postitInput.datatime.substring(0,10)+'</span>\
-    heure : <span class="datatime">'+postitInput.datatime.substring(11)+'</span>\
-    <h2>Description:</h2>'+postitInput.description
+    <div class="postit-title">'+postitInput.title+'</div>\
+    date : <span class="datatime postit-date">'+postitInput.datatime.substring(0,10)+'</span>\
+    heure : <span class="datatime postit-heure">'+postitInput.datatime.substring(11)+'</span>\
+    <h2>Description:</h2><div class="postit-description">'+postitInput.description+'</div>'
     //selection de .close img à partir de postit + add listener sur event click, delete
     postit.querySelector('.close img').addEventListener('click', deletePostIt);
    
@@ -134,6 +140,19 @@ function deletePostIt(evt) {
 //fonction d'element tout en minuscule
 function putinformclickedpostit(evt) {
     console.log('j\'ai clicker sur un postit', evt);
+    var dompostit=evt.currentTarget ;
+    console.log(
+        dompostit.id.substring(7),
+        dompostit.querySelector('.postit-title').innerText,
+        dompostit.querySelector('.postit-date').innerText,
+        dompostit.querySelector('.postit-heure').innerText,
+        dompostit.querySelector('.postit-description').innerText
+    )
+    document.forms['editor-form']['id'].value=dompostit.id.substring(7);
+    document.forms['editor-form']['title'].value=dompostit.querySelector('.postit-title').innerText;
+    document.forms['editor-form']['date'].value=dompostit.querySelector('.postit-date').innerText;
+    document.forms['editor-form']['heure'].value=dompostit.querySelector('.postit-heure').innerText;
+    document.forms['editor-form']['description'].value=dompostit.querySelector('.postit-description').innerText;
 }
 
 
